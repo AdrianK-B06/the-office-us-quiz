@@ -35,11 +35,58 @@ h1 {
     height: 70vh;
     
 }
-.quizBox {
+#quizBox {
     width: 48.56rem;
     height: 29.63rem;
     border-radius: 2.19rem;
     border: 0.31rem solid #000;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+}
+
+button {
+	box-shadow:inset 0px -3px 7px 0px #2e2f30;
+	background:linear-gradient(to bottom, #cbd2d6 5%, #333333 100%);
+	background-color:#cbd2d6;
+	border-radius:.5rem;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+    font-family: american typewriter, sans-serif;
+}
+button:hover {
+	background:linear-gradient(to bottom, #333333 5%, #cbd2d6 100%);
+	background-color:#333333;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    
+    30%, 50%, 70% {
+      transform: translate3d(-2px, 0, 0);
+    }
+
+    40%, 60% {
+      transform: translate3d(2px, 0, 0); 
+    } 
 }

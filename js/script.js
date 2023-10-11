@@ -51,3 +51,35 @@ const QuizQuestions = [
     }
   ];
   
+  // Define variables to track the current question index and user's score.
+  let currentQuestionIndex = 0;
+  let userScore = 0;
+
+
+  // Function to create the "start" button dynamically.
+  function createStartButton() {
+    const quizBox = document.getElementById("quizBox")
+  
+
+  // Create the button element
+  const startButton = document.createElement("button");
+  startButton.textContent = "Start Quiz Here!";
+  startButton.addEventListener("click", startQuiz);
+
+  // Append the button to the container.
+  quizBox.appendChild(startButton);
+}
+
+// Function to start the quiz
+function startQuiz() {
+    // Hide the "Start" button by removing it from the DOM
+    const startButton = document.querySelector("quizBox button");
+    startButton.remove();
+
+    // Display the first question
+    displayQuestion(currentQuestionIndex);
+}
+
+// Call the function to create the "Start" button when the page loads
+
+createStartButton();
