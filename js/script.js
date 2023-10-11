@@ -70,16 +70,46 @@ const QuizQuestions = [
   quizBox.appendChild(startButton);
 }
 
-// Function to start the quiz
+// Function to start the quiz.
 function startQuiz() {
-    // Hide the "Start" button by removing it from the DOM
+    // Hide the "Start" button by removing it from the DOM.
     const startButton = document.querySelector("quizBox button");
     startButton.remove();
 
-    // Display the first question
+    // Display the first question.
     displayQuestion(currentQuestionIndex);
 }
 
-// Call the function to create the "Start" button when the page loads
+// Call the function to create the "Start" button when the page loads.
 
 createStartButton();
+
+// Function to display a question.
+function displayQuestion(questionIndex) {
+    const quizBox = document.getElementById("quizBox")
+    const questionDiv = document.createElement("div");
+
+    // Display the question text.
+    const questionText = document.createElement("p");
+    questionText.textContent = QuizQuestions[questionIndex].question;
+    questionDiv.appendChild(questionText);
+
+    // Display answer choices with radio buttons.
+    const answerChoices = QuizQuestions[questionIndex].answers;
+    answerChoices.forEach((choice, index) => {
+        const choicelabel = document.createElement("label");
+        const choiceInput = document.createElement("input");
+        choiceInput.type = "radio";
+        choiceInput.name = "answer";
+        choice.value = choice;
+        choicelabel.appendChild(choiceInput);
+        choicelabel.appendChild(document.createTextNode(choice));
+        questionDiv.appendChild(choiceLabel);
+    });
+
+    // Append the question to the quiz container.
+    quizBox.appendChild(questionDiv);
+}
+
+// Call displayQuestion to display the first question when the quiz starts.
+displayQuestion(currentQuestionIndex);
