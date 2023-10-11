@@ -10,7 +10,7 @@ body {
 
 header {
     background-color: #141414;
-    height: 6rem;
+    height: 14.81rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,28 @@ header {
 
 h1 {
     font-family: American Typewriter, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 3.75rem;
     color: #F0F0F0;
+    border: .1rem solid whitesmoke;
+    border-radius: 2.19rem;
+    padding: 1.75rem 6.38rem;
+
     
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    
+}
+.quizBox {
+    width: 48.56rem;
+    height: 29.63rem;
+    border-radius: 2.19rem;
+    border: 0.31rem solid #000;
+    text-align: center;
+
 }
