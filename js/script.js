@@ -70,10 +70,10 @@ const QuizQuestions = [
   quizBox.appendChild(startButton);
 }
 
-// Function to clear the quiz container
-function clearQuizContainer() {
-    const quizBox = document.getElementById("quizBox");
-    quizBox.innerHTML = ""; // Clear the content
+// Function to initialize the quiz.
+function initializeQuiz() {
+    // Call the function to create the "start" button.
+    createStartButton();
 }
 
 // Function to start the quiz.
@@ -82,24 +82,17 @@ function startQuiz() {
     const startButton = document.querySelector("#quizBox button");
     startButton.remove();
 
-    // Clear the quiz container
-    clearQuizContainer();
-
     // Display the first question.
     displayQuestion(currentQuestionIndex);
+
+
 }
 
-// Function to initialize the quiz
-function initializeQuiz() {
-    // Call the function to create the "Start" button.
-    createStartButton();
-  }
   
-  // Call the function to initialize the quiz when the page loads
-  initializeQuiz();
 
 // Function to display a question.
 function displayQuestion(questionIndex) {
+    clearCurrentQuestion(); // Clear the current question.
     const quizBox = document.getElementById("quizBox")
     const questionDiv = document.createElement("div");
 
@@ -123,6 +116,22 @@ function displayQuestion(questionIndex) {
 
     // Append the question to the quiz container.
     quizBox.appendChild(questionDiv);
+
+    // Create the "Next" button.
+    createNextButton();
+
+    // Create the "Previous" button and hide it initially.
+    createPrevButton();
+
+
+}
+
+// Function to clear the current question.
+function clearCurrentQuestion() {
+    const quizBox = document.getElementById("quizBox");
+    while (quizBox.firstChild) {
+        quizBox.removeChild(quizBox.firstChild);
+    }
 }
 
 // Function to create the "Next" button.
@@ -145,12 +154,41 @@ function createPrevButton() {
     // Create the button element.
     const prevButton = document.createElement("button");
     prevButton.textContent = "Previous";
-    prevButton.style.display = "none";
     prevButton.addEventListener("click", prevQuestion);
 
     // Append the button to the container.
     quizBox.appendChild(prevButton);
 }
 
-createNextButton();
-createPrevButton();
+// Define the nextQuestion function
+function nextQuestion() {
+    if (currentQuestionIndex < QuizQuestions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion(currentQuestionIndex);
+        
+    }
+
+    const selectedAnswer = document.querySelector("input[name='answer']:checked");
+
+    if (!selectedAnswer) {
+        alert("Please select an answer before proceeding.");
+        return;
+    }
+
+    userScore += QuizQuestions[currentQuestionIndex].correctAnswer === selectedAnswer.value ? 1 : 0;
+
+    currentQuestionIndex++;
+    clearCurrentQuestion();
+    displayQuestion(currentQuestionIndex);
+}
+
+// Define the prevQuestion function
+function prevQuestion() {
+    currentQuestionIndex--; // Move to the previous question
+    clearCurrentQuestion(); // Clear the current question
+    displayQuestion(currentQuestionIndex); // Display the previous question
+}
+
+
+// Call the function to initialize the quiz when the page loads
+initializeQuiz();
