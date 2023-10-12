@@ -129,7 +129,7 @@ function displayQuestion(questionIndex) {
 function createNextButton() {
     const quizBox = document.getElementById("quizBox");
 
-    // Create the button element
+    // Create the button element.
     const nextButton = document.createElement("button");
     nextButton.textContent = "Next";
     nextButton.addEventListener("click", nextQuestion);
@@ -138,4 +138,19 @@ function createNextButton() {
     quizBox.appendChild(nextButton);
 }
 
+// Function to create the "Previous" button.
+function createPrevButton() {
+    const quizBox = document.getElementById("quizBox")
+
+    // Create the button element.
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.style.display = "none";
+    prevButton.addEventListener("click", prevQuestion);
+
+    // Append the button to the container.
+    quizBox.appendChild(prevButton);
+}
+
 createNextButton();
+createPrevButton();
