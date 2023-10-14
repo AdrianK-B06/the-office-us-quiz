@@ -16,23 +16,23 @@ const QuizQuestions = [
     },
     {
       question: "Michael and Dwight tried to steal clients from which local competing business?",
-      answers: ["Paper Mill", "Prince Family Paper.", "Great Paper", "Stapels"],
-      correctAnswer: "Prince Family Paper.",
+      answers: ["Paper Mill", "Prince Family Paper", "Great Paper", "Staples"],
+      correctAnswer: "Prince Family Paper",
     },
     {
-      question: "Finish Dwight's security code: 'The tea in Nepal is very hot...'",
-      answers: ["But the coffee in Peru is much hotter.", "Bears, beets, Battlestar Galactica.", "Schrute Farms, Bed & Breakfast.", "Dunder Mifflin, the paper people."],
-      correctAnswer: "But the coffee in Peru is much hotter.",
+      question: "Ryan caused the fire at the office warming up what?",
+      answers: ["A cheese pita", "A bagel", "A toaster strudel", "A microwave burrito"],
+      correctAnswer: "A cheese pita",
     },
     {
       question: "What is the title of Michael's movie?",
-      answers: ["Threat Level Midnight.", "The Dundies", "Scott's Tots", "Paper Jam"],
-      correctAnswer: "Threat Level Midnight."
+      answers: ["Threat Level Midnight", "The Dundies", "Scott's Tots", "Paper Jam"],
+      correctAnswer: "Threat Level Midnight"
     },
     {
       question: "What is the name of Dwight's porcupine?",
-      answers: ["Henrietta.", "Spike", "Prickles", "Quilliam"],
-      correctAnswer: "Henrietta.",
+      answers: ["Henrietta", "Spike", "Prickles", "Quilliam"],
+      correctAnswer: "Henrietta",
     },
     {
       question: "Who is known for his obsession with bears, beets, and 'Battlestar Galactica'?",
@@ -46,10 +46,11 @@ const QuizQuestions = [
     },
     {
       question: "Which of Angela's cats did Dwight kill?",
-      answers: ["Bandit.", "Smokey.", "Fluffy.", "Sprinkles."],
-      correctAnswer: "Sprinkles.",
+      answers: ["Bandit", "Smokey", "Fluffy", "Sprinkles"],
+      correctAnswer: "Sprinkles",
     }
   ];
+  
   
   // Define variables to track the current question index and user's score, and the next button.
   let currentQuestionIndex = 0;
@@ -186,11 +187,20 @@ function showScoreScreen() {
     const scoreDiv = document.createElement("div");
 
     const scoreText = document.createElement("p");
+    const perfectScoreMsg = document.createElement("p");
+
     scoreText.textContent = `You scored ${correctAnswers} out of ${QuizQuestions.length} questions correctly!`;
 
-    scoreDiv.appendChild(scoreText);
+    if (correctAnswers === QuizQuestions.length) {
+        perfectScoreMsg.textContent = "Congratulations! You got a perfect score!";
+    } else {
+        perfectScoreMsg.textContent = "Good job on completing the quiz!";
+    }
 
-    quizBox.appendChild(scoreDiv)
+
+    scoreDiv.appendChild(scoreText);
+    scoreDiv.appendChild(perfectScoreMsg);
+    quizBox.appendChild(scoreDiv);
 }
 
 function initializeQuiz() {
