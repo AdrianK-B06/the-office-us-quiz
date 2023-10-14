@@ -198,6 +198,16 @@ function initializeQuiz() {
     correctAnswers = 0; // Reset correctAnswers at the beginning of each quiz.
   }
 
+  // Function to shuffle the questions
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  
+  shuffleArray(QuizQuestions);
+
 
 // Call the function to initialize the quiz when the page loads
 initializeQuiz();
