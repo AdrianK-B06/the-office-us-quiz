@@ -45,7 +45,7 @@ h1 {
     
 }
 
-/* button {
+button {
 	box-shadow:inset 0px -3px 7px 0px #2e2f30;
 	background:linear-gradient(to bottom, #cbd2d6 5%, #333333 100%);
 	background-color:#cbd2d6;
@@ -73,7 +73,7 @@ button:hover {
 button:active {
 	position:relative;
 	top:1px;
-} */
+}
 
 
 

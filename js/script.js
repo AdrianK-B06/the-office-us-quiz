@@ -16,7 +16,7 @@ const QuizQuestions = [
     },
     {
       question: "Michael and Dwight tried to steal clients from which local competing business?",
-      answers: ["Paper Mill", "Prince Family Paper", "Great Paper", "Stapels"],
+      answers: ["Paper Mill", "Prince Family Paper.", "Great Paper", "Stapels"],
       correctAnswer: "Prince Family Paper.",
     },
     {
@@ -32,7 +32,7 @@ const QuizQuestions = [
     {
       question: "What is the name of Dwight's porcupine?",
       answers: ["Henrietta.", "Spike", "Prickles", "Quilliam"],
-      correctAnswer: "Henrietta."
+      correctAnswer: "Henrietta.",
     },
     {
       question: "Who is known for his obsession with bears, beets, and 'Battlestar Galactica'?",
@@ -51,9 +51,10 @@ const QuizQuestions = [
     }
   ];
   
-  // Define variables to track the current question index and user's score.
+  // Define variables to track the current question index and user's score, and the next button.
   let currentQuestionIndex = 0;
   let userScore = 0;
+  let correctAnswer = 0;
 
 
   // Function to create the "start" button dynamically.
@@ -117,12 +118,18 @@ function displayQuestion(questionIndex) {
     // Append the question to the quiz container.
     quizBox.appendChild(questionDiv);
 
+    
     // Create the "Next" button.
     createNextButton();
 
-    // Create the "Previous" button and hide it initially.
-    createPrevButton();
+    // Add an event listener to enable the "next" button when an answer is selected.
+    const answerInputs = document.querySelectorAll("input[name='answer']");
 
+    answerInputs.forEach(input => {
+        input.addEventListener("change", () => {
+            nextButton.disabled = false; // Enable the "next" button when an answer is selected.
+        });
+    });
 
 }
 
@@ -139,55 +146,57 @@ function createNextButton() {
     const quizBox = document.getElementById("quizBox");
 
     // Create the button element.
-    const nextButton = document.createElement("button");
+    nextButton = document.createElement("button");
     nextButton.textContent = "Next";
     nextButton.addEventListener("click", nextQuestion);
+    nextButton.disabled = true; 
 
     // Append the button to the container.
     quizBox.appendChild(nextButton);
 }
 
-// Function to create the "Previous" button.
-function createPrevButton() {
-    const quizBox = document.getElementById("quizBox")
 
-    // Create the button element.
-    const prevButton = document.createElement("button");
-    prevButton.textContent = "Previous";
-    prevButton.addEventListener("click", prevQuestion);
-
-    // Append the button to the container.
-    quizBox.appendChild(prevButton);
-}
 
 // Define the nextQuestion function
 function nextQuestion() {
-    if (currentQuestionIndex < QuizQuestions.length - 1) {
-        currentQuestionIndex++;
-        displayQuestion(currentQuestionIndex);
-        
-    }
-
     const selectedAnswer = document.querySelector("input[name='answer']:checked");
 
     if (!selectedAnswer) {
-        alert("Please select an answer before proceeding.");
-        return;
+        return; // Return early if no answer is selected.
     }
 
-    userScore += QuizQuestions[currentQuestionIndex].correctAnswer === selectedAnswer.value ? 1 : 0;
+    if (QuizQuestions[currentQuestionIndex].correctAnswer === selectedAnswer.value) {
+        correctAnswers++;
+    }
 
-    currentQuestionIndex++;
+    
+
+    if (currentQuestionIndex < QuizQuestions.length - 1) {
+        currentQuestionIndex++;
+        clearCurrentQuestion();
+        displayQuestion(currentQuestionIndex);
+    } else {
+        showScoreScreen();
+    }
+}
+
+function showScoreScreen() {
     clearCurrentQuestion();
-    displayQuestion(currentQuestionIndex);
+    const quizBox = document.getElementById("quizBox");
+    const scoreDiv = document.createElement("div");
+
+    const scoreText = document.createElement("p");
+    scoreText.textContent = `You scored ${correctAnswers} out of ${QuizQuestions.length} questions correctly!`;
+
+    scoreDiv.appendChild(scoreText);
+
+    quizBox.appendChild(scoreDiv)
 }
 
-// Define the prevQuestion function
-function prevQuestion() {
-    currentQuestionIndex--; // Move to the previous question
-    clearCurrentQuestion(); // Clear the current question
-    displayQuestion(currentQuestionIndex); // Display the previous question
-}
+function initializeQuiz() {
+    createStartButton();
+    correctAnswers = 0; // Reset correctAnswers at the beginning of each quiz.
+  }
 
 
 // Call the function to initialize the quiz when the page loads
