@@ -52,34 +52,35 @@ const QuizQuestions = [
   ];
   
   
-  // Define variables to track the current question index and user's score, and the next button.
-  let currentQuestionIndex = 0;
-  let userScore = 0;
-  let correctAnswer = 0;
+// Define variable to track the current question index.
+let currentQuestionIndex = 0;
 
 
-  // Function to create the "start" button dynamically.
-  function createStartButton() {
+// Function to create the "start" button.
+function createStartButton() {
     const quizBox = document.getElementById("quizBox")
   
 
-  // Create the button element
-  const startButton = document.createElement("button");
-  startButton.textContent = "Start Quiz Here!";
-  startButton.addEventListener("click", startQuiz);
+// Create the button element.
+const startButton = document.createElement("button");
+    startButton.textContent = "Start Quiz Here!";
+    startButton.addEventListener("click", startQuiz);
 
-  // Append the button to the container.
-  quizBox.appendChild(startButton);
+// Append the button to the container.
+quizBox.appendChild(startButton);
+
 }
 
 // Function to initialize the quiz.
 function initializeQuiz() {
+
     // Call the function to create the "start" button.
     createStartButton();
 }
 
 // Function to start the quiz.
 function startQuiz() {
+
     // Hide the "Start" button by removing it from the DOM.
     const startButton = document.querySelector("#quizBox button");
     startButton.remove();
@@ -87,14 +88,12 @@ function startQuiz() {
     // Display the first question.
     displayQuestion(currentQuestionIndex);
 
-
 }
 
-  
 
 // Function to display a question.
 function displayQuestion(questionIndex) {
-    clearCurrentQuestion(); // Clear the current question.
+    clearCurrentQuestion(); // Clears the current question.
     const quizBox = document.getElementById("quizBox")
     const questionDiv = document.createElement("div");
 
@@ -181,6 +180,7 @@ function nextQuestion() {
     }
 }
 
+// Function to display the final score and a special message.
 function showScoreScreen() {
     clearCurrentQuestion();
     const quizBox = document.getElementById("quizBox");
@@ -191,6 +191,7 @@ function showScoreScreen() {
 
     scoreText.textContent = `You scored ${correctAnswers} out of ${QuizQuestions.length} questions correctly!`;
 
+    // Check if the user scored 10 out of 10.
     if (correctAnswers === QuizQuestions.length) {
         perfectScoreMsg.textContent = "Congratulations! You got a perfect score!";
     } else {
